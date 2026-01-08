@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fran's Locações</title>
+
+    <link rel="icon" type="image/png" href="favicon.of.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background-color: #e4e4e4;
+        }
+        html {
+            scroll-behavior: smooth; /* animacao mover paginas*/
+        }
+
+        /* header */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 14px 28px;
+            background: linear-gradient(90deg, rgb(245, 210, 222), rgb(210, 245, 205));
+            box-shadow: 0 4px 10px rgba(88, 87, 88, 0.82);
+        }
+
+        .topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .marca {
+            margin: 8px;          /* remove margens padrão do h1 */
+            line-height: 1;     /* centraliza melhor verticalmente */
+            font-size: 31px;
+            color: #030303;
+        }
+        .logo {
+            width: 135px;
+        }
+
+        #acessos {
+            display: flex;
+            gap: 12px;
+            margin-top: 35px;
+            margin-right: 6px;
+        }
+        #acessos a {
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #566068;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+        #acessos a.cor1:hover {
+            color: #0091ff;
+            transform: translateY(-3.2px);
+        }
+        #acessos a.cor2:hover {
+            color: #ff0084;
+            transform: translateY(-3.2px);
+        }
+        #acessos a.cor3:hover {
+            color: #ff6f00;
+            transform: translateY(-3.2px);
+        }
+
+        #acessos a.cor4:hover {
+            color: #a2ff00;
+            transform: translateY(-3.2px);
+        }
+        #acessos a.cor5:hover {
+            color: #ffc800;
+            transform: translateY(-3.2px);
+        }
+        section {
+            padding: 60px 40px;
+        }
+        @media (max-width: 768px) {
+        #acessos {
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .logo {
+            width: 70px;
+        }
+
+        .marca {
+            font-size: 18px;
+        }
+        }
+
+        /* banner */
+
+        .hero {
+            padding: 0;
+            position: relative;
+        }
+
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .direcionamento {
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+            background: rgba(253, 253, 253, 0);
+            padding: 14px 18px;
+            border-radius: 80px;
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            animation: bounce 2s infinite;
+            box-shadow: 0 4px 10px rgb(46, 46, 46);
+        }
+
+        .direcionamento h2 {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translate(-50%, -50%);
+            }
+            50% {
+                transform: translate(-50%, -65%);
+            }
+        }
+        @media (max-width: 768px) {
+        .banner {
+        height: 300px;
+        }
+
+        .direcionamento {
+            left: 50%;
+            padding: 12px 16px;
+        }
+
+        .direcionamento h2 {
+            font-size: 13px;
+            text-align: center;
+        }
+        }
+
+        /* catálogo */
+        .ancora {
+            display: block;
+            height: 60px;
+            margin-top: 0px;
+            visibility: hidden;
+        }
+        .titulo-catalogo {
+            font-size: 26px;
+            margin-bottom: 25px;
+            text-align: center;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .catalogo {
+            background-color: #ffffff;
+            text-align: center;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .catalogo h2 {
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 220px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.308);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-0.5px);
+            box-shadow: 0 8px 18px rgba(83, 83, 83, 0.25);
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 8px;
+        }
+
+        .card-info h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .card-info p {
+            font-size: 14px;
+            color: #555;
+        }
+        .tipos  {
+            display: flex;
+            font-size: 24px;
+            margin: 40px 0 20px;
+            text-align: left;
+        }
+    @media (max-width: 768px) {
+        .cards {
+        gap: 142px;
+        }
+
+        .card {
+        width: 90%;
+        max-width: 320px;
+        }
+
+        .tipos {
+        font-size: 20px;
+        }
+
+        .titulo-catalogo {
+        font-size: 22px;
+        }
+    }
+        /* contato */
+        .ancoragem {
+            display: block;
+            height: 280px;
+            margin-top: 0px;
+            visibility: hidden;
+        }
+        .contato {
+            text-align: center;
+            font-weight: bold;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin: 10px;
+        }
+        .whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff5e00;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        /*  feedbacks */
+        .cliente {
+            display: block;
+            height: 240px;
+            margin-top: 0px;
+            visibility: hidden;
+        }
+        /* sobre*/
+        .ancore {
+            display: block;
+            height: 200px;
+            margin-top: 0px;
+            visibility: hidden;
+        }
+        .cards-horizontal {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .cards-horizontal::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .cards-horizontal::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+
+        .cards-horizontal .card {
+            flex: 0 0 auto;
+            width: 220px;
+        }
+        .feedback {   /*estrutura do feedback*/
+            text-align: center;
+            font-weight: bold;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin: 10px;
+        }
+        .bloco {
+            width: 100%;
+            background: white;
+            border-radius: 0px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.308);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .bloco img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+        .bloco-info {
+            padding: 8px;
+        }
+        .bloco-info h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .bloco-info p {
+            font-size: 14px;
+            color: #555;
+        }
+        .tpbloco  {
+            display: flex;
+            font-size: 24px;
+            margin: 40px 0 20px;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+    section {
+        padding: 30px 16px;
+    }
+}
+        @media (max-width: 768px) {
+    header {
+        padding: 10px 16px;
+    }
+
+    .topo {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+@media (max-width: 768px) {
+    .tipos {
+        margin: 24px 0 12px;
+        padding-left: 4px;
+    }
+}
+@media (max-width: 768px) {
+    .direcionamento {
+        max-width: 90%;
+        text-align: center;
+    }
+}
+@media (max-width: 768px) {
+
+/* NÃO deixe o card ocupar 90% no slide */
+.cards-horizontal .card {
+    width: 240px;
+    max-width: none;
+}
+
+/* mantém swipe suave */
+.cards-horizontal {
+    -webkit-overflow-scrolling: touch;
+}
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="topo">
+            <a href="#">
+                <img src="logo.png.png" class="logo" alt="Fran's Locações">
+                <h1 class="marca">Fran's Locações</h1>
+            </a>
+
+            <nav id="acessos">
+                <a href="#" class="cor1">Início</a>
+                <a href="#catalogo" class="cor2">Catálogo</a>
+                <a href="#feedbacks" class="cor4">Feedbacks</a>
+                <a href="#contato" class="cor3">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <img src="banner.prin.jpg.jpg" class="banner" alt="Banner principal">
+
+        <a href="#catalogo" class="direcionamento">
+            <h2>Venha já garantir a alegria da criançada!</h2>
+        </a>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section id="catalogo">
+        <span id="catalogo" class="ancora"></span>
+        <h1 class="titulo-catalogo">Nosso Catálogo</h1>
+        <h2 class="tipos">Brinquedos & Recreação</h2>
+
+        <div class="cards-horizontal">
+            <div class="card">
+                <img src="pulapula37.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Pula-Pula Infantil</h3>
+                    <p>Aluguel diário</p>
+                    <p>R$ 250,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="pulapula3.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Pula-Pula Infantil</h3>
+                    <p>Aluguel diário</p>
+                    <p>R$ 200,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="pulapula3.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Pula-Pula Infiantl</h3>
+                    <p>Aluguel diário</p>
+                    <p>R$ 180,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="corridamaluca.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Corrida Maluca</h3>
+                    <p>Aluguel diário</p>
+                    <p>R$ 300,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="escorrega.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Escorregador Inflável</h3>
+                    <p>Aluguel diário</p>
+                    <p>R$ 800,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="futebol.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Futebol de Sabão</h3>
+                    <p>Aluguel diário</p>
+                    <p>R$ 1100,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="touro.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Touro Mecânico</h3>
+                    <p>Aluguel diário</p>
+                    <p>R$ 1700,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="recreacao.jpg (2).jpg" alt="">
+                <div class="card-info">
+                    <h3>Recreação e pintura facial</h3>
+                    <p>Valor diário</p>
+                    <p>R$ 500,00</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <h2 class="tipos">Alimentação</h2>
+
+        <div class="cards-horizontal">
+            <div class="card">
+                <img src="crepe.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Crepe Suiço</h3>
+                    <p>Valor pacote</p>
+                    <p>R$ 300,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="pao.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Mini-hamburguer</h3>
+                    <p>Valor pacote</p>
+                    <p>R$ 500,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="pastel.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Mini Pastel</h3>
+                    <p>Valor pacote</p>
+                    <p>R$ 300,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="batata.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Batata frita</h3>
+                    <p>Valor pacote</p>
+                    <p>R$ 250,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="sorvete.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Sorvete Americano</h3>
+                    <p>Valor pacote</p>
+                    <p>R$ 600,00</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="algodao.jpg.jpg" alt="">
+                <div class="card-info">
+                    <h3>Algodão doce</h3>
+                    <p>Diversão garantida</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="cascata.jpeg" alt="">
+                <div class="card-info">
+                    <h3>Cascata de chocolate</h3>
+                    <p>Para todas as idades</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="tipos">Serviços</h2>
+
+        <div class="cards-horizontal">
+
+            <div class="card">
+                <img src="balao.jpg" alt="">
+                <div class="card-info">
+                    <h3>Arco de balões</h3>
+                    <p>Ideal para festas</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="arcoalgodao.jpg" alt="">
+                <div class="card-info">
+                    <h3>Arco de algodão doce</h3>
+                    <p>Para todas as idades</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="mesas.png" alt="">
+                <div class="card-info">
+                    <h3>Aluguel de mesas e cadeiras</h3>
+                    <p>Para todas as idades</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="barraca.jpg" alt="">
+                <div class="card-info">
+                    <h3>Aluguel de barraquinhas</h3>
+                    <p>Para todas as idades</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="som.jpeg" alt="">
+                <div class="card-info">
+                    <h3>Aluguel de som</h3>
+                    <p>Para todas as idades</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="freezer.jpeg" alt="">
+                <div class="card-info">
+                    <h3>Aluguel</h3>
+                    <p>Diversão garantida</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+        <!-- feedbacks -->
+    <section>
+        <section class="feedback">
+            <span id="feedbacks" class="cliente"></span>
+                <h2>Veja os Feedbacks de nossos clientes!</h2>
+        </section>
+        <section>
+            <div class="cards-horizontal">
+                <div class="bloco">
+                    <img src="touro.jpg.jpg" alt="">
+                    <div class="bloco-info">
+                        <h3>Cliente X</h3>
+                        <p>Feedback do cliente X<br>
+                            Realizamos a festa na data xx/xx e todos amaram a diversão<br>
+                            obrigado!! e até a próxima..
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!-- contato -->
+    <section class="contato">
+        <span id="contato" class="ancoragem"></span>
+        <h4>Diversão para todas as idades, com qualidade e carinho em cada detalhe.<br></h4>
+        Instagram - @franslocacoes<br>
+        Telefone - (62) 98565-0515<br>
+        CNPJ - 12345678901234<br>
+        <a href="https://wa.me/5562985650515" class="whatsapp" target="_blank">Contate-nos</a>
+    </section>
+
+</body>
+</html>
